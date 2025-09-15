@@ -60,4 +60,4 @@ jobs:
 
     - name: Run security scan
       run: |
-        safety check -r requirements.txt --short-report
+        safety scan -r requirements.txt --short-report
