@@ -24,7 +24,7 @@ class GCPStorageManager:
 
         Parameters:
         -----------
-            model_type (str): The name of the classifier model type: 'lr' for Logistic 
+            model_type (str): The name of the classifier model type: 'lr' for Logistic
                 Regression, 'svm' for Support Vector Machine.
 
         Returns:
@@ -33,28 +33,27 @@ class GCPStorageManager:
         """
 
         blob_name = f"models/model_{model_type}.pkl"
-        
+
         try:
-            
             logger.info(
                 f"Checking if a classifier model exists in bucket directory: 'gs://{BUCKET_NAME}/models/**'"
             )
 
             blob = self.bucket.blob(blob_name)
-            
+
             return blob.exists()
-        
+
         except Exception as e:
             logger.error(f"Error checking model existence in bucket: {e}")
             raise
-        
+
     def vectorizer_exists(self, vectorizer_type: str) -> bool:
         """
         Check if a vectorizer file exists in the GCP bucket.
 
         Parameters:
         -----------
-            vectorizer_type (str): The name of the vectorizer type: 'count' for Count 
+            vectorizer_type (str): The name of the vectorizer type: 'count' for Count
                 Vectorizer, 'tfidf' for TF-IDF Vectorizer.
 
         Returns:
@@ -65,15 +64,14 @@ class GCPStorageManager:
         blob_name = f"vectorizers/vectorizer_{vectorizer_type}.pkl"
 
         try:
-            
             logger.info(
                 f"Checking if vectorizer exists in bucket directory: 'gs://{BUCKET_NAME}/vectorizers/**'"
             )
-            
+
             blob = self.bucket.blob(blob_name)
-            
+
             return blob.exists()
-        
+
         except Exception as e:
             logger.error(f"Error checking vectorizer existence in bucket: {e}")
             raise
@@ -85,16 +83,17 @@ class GCPStorageManager:
         Parameters:
         -----------
             model: The trained model object to upload.
-            model_type (str): The type of the model (e.g., 'lr' for Logistic Regression, 
+            model_type (str): The type of the model (e.g., 'lr' for Logistic Regression,
                 'svm' for Support Vector Machine).
         """
 
         blob_name = f"models/model_{model_type}.pkl"
 
         try:
-            
-            logger.info(f"Uploading classifier model to GCP bucket: 'gs://{BUCKET_NAME}/{blob_name}'")
-        
+            logger.info(
+                f"Uploading classifier model to GCP bucket: 'gs://{BUCKET_NAME}/{blob_name}'"
+            )
+
             blob = self.bucket.blob(blob_name)
 
             # Save the model to a temporary file
@@ -106,7 +105,7 @@ class GCPStorageManager:
             os.remove(temp_file.name)
 
             logger.info("Model uploaded successfully.")
-        
+
         except Exception as e:
             logger.error(f"Error uploading model to bucket: {e}")
             raise
@@ -118,18 +117,17 @@ class GCPStorageManager:
         Parameters:
         -----------
             vectorizer: The vectorizer object to upload.
-            vectorizer_type (str): The type of the vectorizer (e.g., 'count' for Count 
+            vectorizer_type (str): The type of the vectorizer (e.g., 'count' for Count
                 Vectorizer, 'tfidf' for TF-IDF Vectorizer).
         """
 
         blob_name = f"vectorizers/vectorizer_{vectorizer_type}.pkl"
 
         try:
-            
             logger.info(
                 f"Uploading vectorizer to GCP bucket: 'gs://{BUCKET_NAME}/{blob_name}'"
             )
-            
+
             blob = self.bucket.blob(blob_name)
 
             # Save the vectorizer to a temporary file
@@ -141,18 +139,18 @@ class GCPStorageManager:
             os.remove(temp_file.name)
 
             logger.info("Vectorizer uploaded successfully.")
-        
+
         except Exception as e:
             logger.error(f"Error uploading vectorizer to bucket: {e}")
             raise
-        
+
     def load_model(self, model_type: str):
         """
         Load a model from the GCP bucket.
 
         Parameters:
         -----------
-            model_type (str): The type of the model to load (e.g., 'lr' for Logistic 
+            model_type (str): The type of the model to load (e.g., 'lr' for Logistic
                 Regression, 'svm' for Support Vector Machine).
 
         Returns:
@@ -163,8 +161,10 @@ class GCPStorageManager:
         blob_name = f"models/model_{model_type}.pkl"
 
         try:
-            logger.info(f"Attempting to load classifier model from GCP bucket: 'gs://{BUCKET_NAME}/{blob_name}'")
-            
+            logger.info(
+                f"Attempting to load classifier model from GCP bucket: 'gs://{BUCKET_NAME}/{blob_name}'"
+            )
+
             blob = self.bucket.blob(blob_name)
 
             # Download the model to a temporary file
@@ -178,7 +178,7 @@ class GCPStorageManager:
             logger.info("Model loaded successfully.")
 
             return model
-        
+
         except Exception as e:
             logger.error(f"Error loading model from bucket: {e}")
             raise
@@ -189,7 +189,7 @@ class GCPStorageManager:
 
         Parameters:
         -----------
-            vectorizer_type (str): The type of the vectorizer to load (e.g., 'count' for 
+            vectorizer_type (str): The type of the vectorizer to load (e.g., 'count' for
                 Count Vectorizer, 'tfidf' for TF-IDF Vectorizer).
 
         Returns:
@@ -202,8 +202,8 @@ class GCPStorageManager:
         try:
             logger.info(
                 f"Attempting to load vectorizer from GCP bucket: 'gs://{BUCKET_NAME}/{blob_name}'"
-            )   
-            
+            )
+
             blob = self.bucket.blob(blob_name)
 
             # Download the vectorizer to a temporary file
@@ -217,7 +217,7 @@ class GCPStorageManager:
             logger.info("Vectorizer loaded successfully.")
 
             return vectorizer
-        
+
         except Exception as e:
             logger.error(f"Error loading vectorizer from bucket: {e}")
             raise

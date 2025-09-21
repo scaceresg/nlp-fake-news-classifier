@@ -49,7 +49,6 @@ class TextPreprocessor:
         """
 
         try:
-
             # Remove hyphens at the beginning of text
             text = re.sub(r"^[^-]*-\s", "", text)
 
@@ -71,7 +70,7 @@ class TextPreprocessor:
             tokens = [self.lemmatizer.lemmatize(word) for word in tokens]
 
             return tokens
-        
+
         except Exception as e:
             logger.error(f"Error in preprocessing the text: {e}")
             raise
@@ -94,7 +93,7 @@ class TextPreprocessor:
 
         try:
             logger.info("Preprocessing text in training dataset")
-            
+
             # Preprocess the training dataset
             text_df["clean_text"] = text_df[text_column].apply(self.preprocess_text)
 

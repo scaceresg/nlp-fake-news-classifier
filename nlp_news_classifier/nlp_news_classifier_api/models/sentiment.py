@@ -29,7 +29,7 @@ class SentimentAnalyzer:
 
         try:
             logger.info("Analyzing sentiment of the input text")
-            
+
             compound_score = self.analyzer.polarity_scores(text)["compound"]
 
             if compound_score <= -0.1:
@@ -38,10 +38,10 @@ class SentimentAnalyzer:
                 sentiment_label = "positive"
             else:
                 sentiment_label = "neutral"
-                
+
             return {
                 "overall_sentiment": sentiment_label,
-                "compound_score": compound_score
+                "compound_score": compound_score,
             }
 
         except Exception as e:
