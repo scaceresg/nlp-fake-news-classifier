@@ -12,7 +12,8 @@ def setup_logger(name: str, level: int = logging.INFO) -> logging.Logger:
     Parameters:
     ----------
         name (str): Name of the logger.
-        level (int): Logging level (e.g., logging.INFO, logging.DEBUG). Default is logging.INFO.
+        level (int): Logging level (e.g., logging.INFO, logging.DEBUG). Default is
+            logging.INFO.
 
     Returns:
     ---------
@@ -31,7 +32,7 @@ def setup_logger(name: str, level: int = logging.INFO) -> logging.Logger:
 
     # Formatter
     formatter = logging.Formatter(
-        fmt="%(asctime)s - %(levelname)s - %(module)s:%(funcName)s:%(lineno)d - %(message)s",
+        fmt="%(asctime)s [%(levelname)s] %(module)s:%(funcName)s:%(lineno)d: %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
     console_handler.setFormatter(formatter)
@@ -49,7 +50,8 @@ def get_absolute_path(relative_path: str) -> str:
 
     Parameters:
     ----------
-        relative_path (str): The relative path to the file. For example, "../data/fake_news_data.csv".
+        relative_path (str): The relative path to the file. For example,
+            "../data/fake_news_data.csv".
 
     Returns:
     ---------
@@ -89,9 +91,7 @@ def timer(func):
         end_time = time.time()
         elapsed_time = end_time - start_time
 
-        logger.info(
-            f"Function '{func.__name__}' executed in {elapsed_time:.4f} seconds"
-        )
+        logger.info(f"Function '{func.__name__}' executed in {elapsed_time:.4f} seconds")
 
         return result
 

@@ -15,9 +15,7 @@ class NewsClassifier:
     A class for training and managing text classifiers for fake news detection.
     """
 
-    def __init__(
-        self, classifier_type: str = "lr", vectorization_method: str = "count"
-    ):
+    def __init__(self, classifier_type: str = "lr", vectorization_method: str = "count"):
         self.preprocessor = TextPreprocessor()
         self.vectorizer = TextVectorizer(method=vectorization_method)
         self.gcs_manager = GCPStorageManager()
@@ -26,9 +24,7 @@ class NewsClassifier:
         model_exists = self.gcs_manager.model_exists(model_type=classifier_type)
 
         if model_exists:
-            logger.info(
-                f"A pre-trained {classifier_type} model was found in GCP bucket!"
-            )
+            logger.info(f"A pre-trained {classifier_type} model was found in GCP bucket!")
             self.classifier = self.gcs_manager.load_model(model_type=classifier_type)
         else:
             logger.info(

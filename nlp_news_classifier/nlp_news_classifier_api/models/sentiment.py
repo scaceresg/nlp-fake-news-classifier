@@ -1,5 +1,3 @@
-from typing import Dict
-
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 from utils.utils import logger
@@ -14,7 +12,7 @@ class SentimentAnalyzer:
         self.analyzer = SentimentIntensityAnalyzer()
         logger.info("SentimentAnalyzer initialized.")
 
-    def analyze_sentiment(self, text: str) -> Dict[str, float]:
+    def analyze_sentiment(self, text: str) -> dict[str, float]:
         """
         Analyze the sentiment of the input text.
 
@@ -24,7 +22,8 @@ class SentimentAnalyzer:
 
         Returns:
         --------
-            dict: A dictionary containing the sentiment scores (positive, negative, neutral, compound).
+            dict: A dictionary containing the sentiment scores (positive, negative,
+                neutral, compound).
         """
 
         try:

@@ -1,14 +1,8 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import asynccontextmanager
-
+from fastapi.middleware.cors import CORSMiddleware
 from models.news_classifier import NewsClassifier
-from schemas.data_models import (
-    NewsText,
-    ClassificationResponse,
-    SentimentResponse,
-    ClassificationAndSentimentResponse,
-)
+from schemas.data_models import ClassificationResponse, NewsText
 from utils.utils import logger
 
 try:
@@ -18,7 +12,7 @@ except ImportError:
 
 app = FastAPI(
     title="NLP Fake News Classifier API",
-    description="API for fake news classification, sentiment analysis, and topic modeling",
+    description="API for fake news classification and sentiment analysis",
     version=__version__,
 )
 
@@ -62,11 +56,13 @@ async def classify_text(input_text: NewsText):
 
     Parameters:
     -----------
-        input_data (NewsText): The input text and optional parameters for classification.
+        input_data (NewsText): The input text and optional parameters for
+        classification.
 
     Returns:
     --------
-        ClassificationResponse: The classification result including prediction, classifier, and vectorizer used.
+        ClassificationResponse: The classification result including prediction,
+            classifier, and vectorizer used.
     """
 
     global cls_model

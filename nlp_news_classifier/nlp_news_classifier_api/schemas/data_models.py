@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field
-from typing import Dict, List, Optional
 
 
 class NewsText(BaseModel):
@@ -12,13 +11,13 @@ class NewsText(BaseModel):
         max_length=10000,
         example="Breaking news: Major event happened!",
     )
-    classif_model: Optional[str] = Field(
+    classif_model: str | None = Field(
         default="lr",
-        description="Model to use for classification: logistic regression (lr) or support vector machine (svm)",
+        description="Model to use for classification: 'lr' or 'svm'",
     )
-    vectorizer: Optional[str] = Field(
+    vectorizer: str | None = Field(
         default="count",
-        description="Vectorization method to use: count vectorization (count) or TF-IDF vectorization (tfidf)",
+        description="Vectorization method to use: 'count' or 'tfidf'",
     )
 
 
@@ -41,5 +40,5 @@ class ClassificationAndSentimentResponse(BaseModel):
     """Schema for combined classification and sentiment analysis response"""
 
     text: str
-    classification: List[ClassificationResponse]
-    sentiment_analysis: List[SentimentResponse]
+    classification: list[ClassificationResponse]
+    sentiment_analysis: list[SentimentResponse]

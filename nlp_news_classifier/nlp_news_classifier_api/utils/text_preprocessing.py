@@ -1,6 +1,5 @@
 import re
 import pandas as pd
-from typing import List
 
 import nltk
 from nltk.corpus import stopwords
@@ -34,7 +33,7 @@ class TextPreprocessor:
 
         logger.info("TextPreprocessor initialized.")
 
-    def preprocess_text(self, text: str) -> List[str]:
+    def preprocess_text(self, text: str) -> list[str]:
         """
         Preprocess the input text by lowercasing, removing special characters,
         tokenizing, removing stopwords, and lemmatizing.
@@ -88,7 +87,8 @@ class TextPreprocessor:
 
         Returns:
         --------
-            pd.DataFrame: A dataframe containing the bag-of-words representation of the input text data.
+            pd.DataFrame: A dataframe containing the bag-of-words representation of
+                the input text data.
         """
 
         try:
@@ -98,7 +98,7 @@ class TextPreprocessor:
             text_df["clean_text"] = text_df[text_column].apply(self.preprocess_text)
 
             # Prepare array of preprocessed text
-            cleaned_text = [",".join(map(str, l)) for l in text_df["clean_text"]]
+            cleaned_text = [",".join(map(str, token)) for token in text_df["clean_text"]]
 
             return cleaned_text
 

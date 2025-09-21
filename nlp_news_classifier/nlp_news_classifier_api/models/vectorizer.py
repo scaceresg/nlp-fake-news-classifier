@@ -1,4 +1,3 @@
-from typing import List
 import pandas as pd
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
@@ -37,7 +36,7 @@ class TextVectorizer:
 
         logger.info(f"TextVectorizer initialized with method: {method}")
 
-    def fit_transform_text(self, texts: List[str]) -> pd.DataFrame:
+    def fit_transform_text(self, texts: list[str]) -> pd.DataFrame:
         """
         Fit the vectorizer to the texts and transform them into vectorized form.
 
@@ -47,7 +46,8 @@ class TextVectorizer:
 
         Returns:
         --------
-            pd.DataFrame: A dataframe containing the bag-of-words representation of the input texts.
+            pd.DataFrame: A dataframe containing the bag-of-words representation
+                of the input texts.
         """
 
         try:
@@ -71,7 +71,7 @@ class TextVectorizer:
             logger.error(f"Error in fitting and transforming texts: {e}")
             raise
 
-    def transform_text(self, texts: List[str]) -> pd.DataFrame:
+    def transform_text(self, texts: list[str]) -> pd.DataFrame:
         """
         Transform texts into vectorized form using the already fitted vectorizer.
 
@@ -81,7 +81,8 @@ class TextVectorizer:
 
         Returns:
         --------
-            pd.DataFrame: A dataframe containing the bag-of-words representation of the input texts.
+            pd.DataFrame: A dataframe containing the bag-of-words representation
+                of the input texts.
         """
 
         try:
