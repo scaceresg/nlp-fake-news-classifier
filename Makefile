@@ -14,3 +14,5 @@ install-front:
 	pip install -e .[front]
 fmt:
 	ruff format .
+check:
+	ruff check .
